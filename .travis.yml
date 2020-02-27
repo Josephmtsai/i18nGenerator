@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.6.1"
+cache: pip
+install:
+  - pip install -r requirements.txt
+deploy:
+  provider: Heroku
+  api_key: 
+    secure: FF85O9NTa4k1AlhLABw9YoeUNgUIEzY65gOBvXGH0zm6F0/y5d1EMfV1HGKtdIql5JQ2hT8GgigBjgt7GqPM6QNlGtZ1M9zBPN1NcDm6aZyAtda6jx7d3KFeakZGWCoEuHOOEOgJme14uU0nx874NiTv1aDMtYbg+VGan4hLozxomUl/lrOXuSI+y9wkg3SZGX2lExjTenmH32t+LT8RM8hNlcegPgNXj3g21KIUUMZ6QzqojSbgKolPK9c82j4o1SGf3NzGA5W8cozOSNnUE/LJQ0yOFLPpIb9SHKqC/vbpnG5ZG6vylIGa+kmmp2JfNQ/HKdPRr35cxgsXrqCJzOj2ydrQdGOamV3yC6HAhMEZRakxEK4y96Fi57iBtwQgGVZ4rUbklUz3SQeKVTL++/7/VLFFrbjr6w9DRT0ew+EGYDUnzWN+gQT8VKCUEp9FDvmrIeIfmNw3+kKrvzKz2ok+Gt2jkeqJquiDACy81wxn45FGT1pIk/DTaqB4ra7AB7+zRN2sDGdfcPeIP79vvr8tU08CWo//SVSH1+NmWDS3fiS/w6F6E6X187I3wZgck1mXPWa4IQbVs5sLo5KgkGW3l9Aq6vX46ByRS26CDJyJOM6K+YOb1S7GzOmI8ytmIexp451737cv6zUUgg/5Ee39HiIVNwlhkwm1YeT0ZJ8=
+  app: i18ngenerator
