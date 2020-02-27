@@ -23,7 +23,7 @@ class HelloWorld(Resource):
 class getFile(Resource):
     def get(self):
         keys = ['en-gb','zh-cn','id-id','vi-vn','km-kh','pt-br','ko-kr','ja-jp','th-th']
-        datasource = googleExcelCrawler.geti18nFromExcel(os.environ.get('GoogleAuthKey'),os.environ.get('GoogleSheetId'))
+        datasource = googleExcelCrawler.geti18nFromExcel(os.environ.get('GoogleAuthKey'),os.environ.get('GoogleSheetId'),keys)
         memory_file = BytesIO()
         with zipfile.ZipFile(memory_file, 'w') as zf:
             for key in keys:

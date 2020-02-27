@@ -3,7 +3,7 @@ from apiclient import discovery
 import datetime
 import re
 
-def geti18nFromExcel(apiKey, excelsheetid):
+def geti18nFromExcel(apiKey, excelsheetid,keys):
     sheetList = [u'Resource']
     outputSource = {}
     for key in keys:
