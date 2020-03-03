@@ -2,8 +2,8 @@ import os
 from apiclient import discovery
 import datetime
 import re
-
-def geti18nFromExcel(apiKey, excelsheetid,keys):
+import sys
+def geti18nFromExcel(apiKey, excelsheetid,keys,app):
     sheetList = [u'Resource']
     outputSource = {}
     for key in keys:
@@ -11,7 +11,8 @@ def geti18nFromExcel(apiKey, excelsheetid,keys):
     service = discovery.build('sheets', 'v4', developerKey=apiKey,
                               discoveryServiceUrl='https://sheets.googleapis.com/$discovery/rest?version=v4')
     result = service.spreadsheets().values().batchGet(spreadsheetId=excelsheetid, ranges=sheetList,
-                                                      valueRenderOption='FORMULA', dateTimeRenderOption='FORMATTED_STRING').execute()
+                                                      valueRenderOption='FORMULA', dateTimeRenderOption='FORMATTED_STRING').execute()                                                  
+    app.logger.info('Get Data complete')    
     responseSheet = result.get('valueRanges', [])
     headers = {}
     for index, sheet in enumerate(responseSheet):
@@ -22,9 +23,10 @@ def geti18nFromExcel(apiKey, excelsheetid,keys):
                     headers[cellIndex]= str(cell)
             else:
                 for cellIndex,cell in enumerate(row):
+                    app.logger.info(cellIndex)  
                     cellName = headers[cellIndex]
-                    print(cellName)
                     translateName = row[0]
+                    app.logger.info(translateName)  
                     if cellName in keys:
                         outputSource[cellName][translateName] = cell
     return outputSource

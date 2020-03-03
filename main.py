@@ -10,6 +10,9 @@ from flask import send_file
 import time
 from io import BytesIO
 import json
+import sys
+import logging
+logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 api = Api(app)
 
@@ -18,12 +21,14 @@ cors = CORS(app, resources={r"/api/*": {"origins": r"*"}})
 
 class HelloWorld(Resource):
     def get(self):
+        app.logger.info('Processing default request')
         return "Hello from flask-rest"
 
 class getFile(Resource):
     def get(self):
+        app.logger.info('Processing default request')
         keys = ['en-gb','zh-cn','id-id','vi-vn','km-kh','pt-br','ko-kr','ja-jp','th-th']
-        datasource = googleExcelCrawler.geti18nFromExcel(os.environ.get('GoogleAuthKey'),os.environ.get('GoogleSheetId'),keys)
+        datasource = googleExcelCrawler.geti18nFromExcel(os.environ.get('GoogleAuthKey'),os.environ.get('GoogleSheetId'),keys,app)
         memory_file = BytesIO()
         with zipfile.ZipFile(memory_file, 'w') as zf:
             for key in keys:
@@ -37,4 +42,5 @@ class getFile(Resource):
 api.add_resource(HelloWorld, '/')
 api.add_resource(getFile, '/getfile')
 if __name__ == "__main__":
+    #app.debug = True    
     app.run()        
