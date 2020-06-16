@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, make_response, request, send_file
 from flask_cors import CORS
+from flask import render_template
 import os
 import settings
 from flask_restful import Resource, Api, reqparse
@@ -19,10 +20,14 @@ api = Api(app)
 cors = CORS(app, resources={r"/api/*": {"origins": r"*"}})
 
 
-class HelloWorld(Resource):
-    def get(self):
-        app.logger.info('Processing default request')
-        return "Hello from flask-rest"
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    return render_template('index.html')
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')
+
 
 class getFile(Resource):
     def get(self):
@@ -39,8 +44,9 @@ class getFile(Resource):
         memory_file.seek(0)
         return send_file(memory_file, attachment_filename='i18n.zip', as_attachment=True)
 
-api.add_resource(HelloWorld, '/')
 api.add_resource(getFile, '/getfile')
 if __name__ == "__main__":
     #app.debug = True    
+    app.config['TEMPLATES_AUTO_RELOAD'] = True      
+    app.jinja_env.auto_reload = True
     app.run()        
