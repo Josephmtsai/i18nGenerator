@@ -11,6 +11,7 @@
 <script>
 $( "#btn" ).click(function() {
     opener.parent.location.reload();
+    $.cookie('loginName', 'joseph', { expires: 7, path: '/' });
     window.close();
 });
 </script>

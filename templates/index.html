@@ -11,6 +11,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 $( "#btn" ).click(function() {
+    
     window.adaSettings = {
         adaReadyCallback: () => {
             window.adaEmbed.toggle();
@@ -21,9 +22,10 @@ $( "#btn" ).click(function() {
         metaFields: {
             username: "Ada Lovelace",
             phone_number: "123-456-7890",
-            accessToken:"art"
+            accessToken: $.cookie('loginName')
         }
     });
+    window.adaEmbed.toggle();
     $( "#btn" ).hide();
 });
 </script>
